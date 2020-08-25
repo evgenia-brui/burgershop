@@ -31,16 +31,14 @@ const ImgLogo = styled.img`
 `;
 
 const SignImg = styled.img`
-    width: 35pxpx;
+    width: 35px;
 `;
 
-const P = styled.p`
-    font-size: 12px;
-    margin-right: 10px;
-`;
-const Sign = styled.div`
-    display: column;
-    align-items: center;
+const Sign = styled.button`
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+    font-size: 16px;
 `;
 
 export const NavBar = () => (
@@ -50,8 +48,8 @@ export const NavBar = () => (
             <H1>BoorgerShop</H1>
         </Logo>
         <Sign>
-            <SignImg src={signImg} alt="sign"/>
-            <P>Войти</P>
+            <SignImg src={signImg} alt="войти"/>
+            <p>Войти</p>
         </Sign>
     </NavBarStyled>
 );
