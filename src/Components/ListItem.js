@@ -8,6 +8,7 @@ const List = styled.ul`
 `;
 
 const Item = styled.li`
+    list-style-type: none;
     position: relative;
     width: 400px;
     height: 155px;
