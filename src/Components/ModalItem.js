@@ -9,11 +9,10 @@ const Overlay = styled.div`
     align-items: center;
     top: 0;
     left: 0;
-    margin-top: 120px;
     width: 100%;
-    heigth: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, .5);
-    z-index: 20;
+    z-index: 1000;
 `;
 
 const Modal = styled.div`
@@ -56,14 +55,14 @@ const NameItem = styled.h2`
 export const ModalItem = ({ openItem, setOpenItem }) => {
 
     function closeModal(e) {
-        if (e.terget.id === 'overlay') {
+        if (e.target.id === 'overlay') {
             setOpenItem(null);
         }
     }
 
     if (!openItem) return null;
     return (
-    <Overlay id="overlay" onClick={closeModal}>
+    <Overlay id="overlay" onClick={ closeModal }>
         <Modal>
             <Banner img={openItem.img}/>
             <ModalBlock>
