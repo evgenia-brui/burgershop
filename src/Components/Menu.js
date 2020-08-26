@@ -2,16 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import dbMenu from './DBMenu';
 import { ListItem } from './ListItem';
-import bannerImg from '../image/banner.png';
+import { Banner } from './Banner';
 
-const Banner = styled.div`
-    hight: 100%;
-`;
-
-const BannerImg = styled.img`
-    width: 100%;
-    hight: 210px;
-`;
 
 const MenuStyled = styled.main`
     background-color: #ccc;
@@ -22,18 +14,22 @@ const SectionMenu = styled.section`
     padding: 30px;
 `;
 
-export const Menu = () => (
+export const Menu = ({ setOpenItem }) => (
     <MenuStyled>
-        <Banner>
-            <BannerImg src={bannerImg} alt='banner'/>
-        </Banner>
+        <Banner/>
         <SectionMenu>
             <h2>Бургеры</h2>
-            <ListItem itemList={dbMenu.burger}/>
+            <ListItem 
+                itemList={dbMenu.burger}
+                setOpenItem={setOpenItem}
+            />
         </SectionMenu>
         <SectionMenu>
             <h2>Закуски / напитки</h2>
-            <ListItem itemList={dbMenu.other}/>
+            <ListItem 
+                itemList={dbMenu.other}
+                setOpenItem={setOpenItem}
+            />
         </SectionMenu>
     </MenuStyled>
 
