@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ButtonAdd } from './ButtonAdd';
+import { ButtonCheckout } from './ButtonCheckout';
 
 const Overlay = styled.div`
     position: fixed;
@@ -27,30 +27,24 @@ const Banner = styled.div`
     background-image: url(${({img}) => img});
     background-size: cover;
     background-position: center;
-    margin-bottom: 20px;
 `;
 
-const NameBlock = styled.div`
+const Content = styled.section`
     display: flex;
-    align-items: center;
-    margin-left: 37px;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 200px);
+    padding: 30px;
 `;
 
-const PriceBlock = styled.div`
-    display: flex;
-    align-items: center;
-    margin-right: 53px;
-`;
-
-const ModalBlock = styled.div`
+const HeaderContent = styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Pacifico', cursive;
 `;
 
-const NameItem = styled.h2`
-    font-size: 30px;
-`;
 
 export const ModalItem = ({ openItem, setOpenItem }) => {
 
@@ -65,20 +59,14 @@ export const ModalItem = ({ openItem, setOpenItem }) => {
     <Overlay id="overlay" onClick={ closeModal }>
         <Modal>
             <Banner img={openItem.img}/>
-            <ModalBlock>
-                <NameBlock>
-                    <NameItem>
-                    {openItem.name}
-                    </NameItem>
-                </NameBlock>
-                <PriceBlock>
-                    <NameItem>
-                    {openItem.price.toLocaleString('by-BY', 
-                    {style: 'currency', currency: 'BYN'})}
-                    </NameItem>
-                </PriceBlock>
-            </ModalBlock> 
-            <ButtonAdd/>
+            <Content>
+                <HeaderContent>
+                    <div>{openItem.name}</div>
+                    <div>{openItem.price.toLocaleString('by-BY', 
+                    {style: 'currency', currency: 'BYN'})}</div>
+                </HeaderContent>
+                <ButtonCheckout>Добавить</ButtonCheckout>
+            </Content> 
         </Modal>
     </Overlay>
     )
