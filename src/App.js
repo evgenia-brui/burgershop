@@ -7,13 +7,8 @@ import { Order } from './Components/Order/Order';
 import { useOpenItem } from './Components/Hooks/useOpenItem';
 import { useOrders } from './Components/Hooks/useOrders';
 
-
-
-
-
-
 function App() {
-
+  
   const openItem = useOpenItem();
   const orders = useOrders();
 
@@ -27,5 +22,4 @@ function App() {
     </>
   );
 }
-
 export default App;
