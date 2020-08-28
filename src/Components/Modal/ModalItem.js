@@ -45,7 +45,6 @@ const HeaderContent = styled.div`
     font-family: 'Pacifico', cursive;
 `;
 
-
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
     const closeModal = e => {

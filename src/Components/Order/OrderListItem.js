@@ -29,7 +29,6 @@ const TrashButton = styled.button`
 `;
 
 export const OrderListItem = ({ order }) => (
-
     <OrderItemStyled>
         <ItemName>{order.name}</ItemName>
         <span>2</span>
@@ -38,4 +37,3 @@ export const OrderListItem = ({ order }) => (
         <TrashButton/>
     </OrderItemStyled>
 );
-

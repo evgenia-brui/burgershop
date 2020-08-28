@@ -4,7 +4,6 @@ import dbMenu from './DBMenu';
 import { ListItem } from './ListItem';
 import { Banner } from './Banner';
 
-
 const MenuStyled = styled.main`
     background-color: #ccc;
     margin-top: 80px;
@@ -33,5 +32,4 @@ export const Menu = ({ setOpenItem }) => (
             />
         </SectionMenu>
     </MenuStyled>
-
 );
