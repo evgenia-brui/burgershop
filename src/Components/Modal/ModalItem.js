@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ButtonCheckout } from '../Style/ButtonCheckout';
+import { CountItem } from './CountItem';
+import { useCount } from '../Hooks/useCount';
+// import { formatCurrency } from '../Functions/secondaryFunction';
+
+
 
 const Overlay = styled.div`
     position: fixed;
@@ -45,7 +50,17 @@ const HeaderContent = styled.div`
     font-family: 'Pacifico', cursive;
 `;
 
+const TotalPriceItem = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+export const formatCurrency = toLocaleString => toLocaleString('by-BY', {style: 'currency', currency: 'BYN'});
+
+export const totalPriceItems = order => order.price * order.count;
+
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
+
+    const counter = useCount();
 
     const closeModal = e => {
         if (e.target.id === 'overlay') {
@@ -54,27 +69,36 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
     }
 
     const order = {
-        ...openItem
+        ...openItem,
+        count: counter.count
     };
+
+    
 
     const addToOrder = () => {
         setOrders([...orders, order])
         setOpenItem(null);
-    }
+    };
+
+    
    
     return (
-    <Overlay id="overlay" onClick={ closeModal }>
-        <Modal>
-            <Banner img={openItem.img}/>
-            <Content>
-                <HeaderContent>
-                    <div>{openItem.name}</div>
-                    <div>{openItem.price.toLocaleString('by-BY', 
-                    {style: 'currency', currency: 'BYN'})}</div>
-                </HeaderContent>
-                <ButtonCheckout onClick={addToOrder} >Добавить</ButtonCheckout>
-            </Content> 
-        </Modal>
-    </Overlay>
+        <Overlay id="overlay" onClick={ closeModal }>
+            <Modal>
+                <Banner img={openItem.img}/>
+                <Content>
+                    <HeaderContent>
+                        <div>{openItem.name}</div>
+                        <div>{openItem.price.toLocaleString('by-BY', {style: 'currency', currency: 'BYN'})}</div>
+                    </HeaderContent>
+                    <CountItem {...counter}/>
+                    <TotalPriceItem>
+                        <span>Цена:</span>
+                        <span>{totalPriceItems(order).toLocaleString('by-BY', {style: 'currency', currency: 'BYN'})}</span>
+                    </TotalPriceItem>
+                    <ButtonCheckout onClick={addToOrder} >Добавить</ButtonCheckout>
+                </Content> 
+            </Modal>
+        </Overlay>
     )
 };

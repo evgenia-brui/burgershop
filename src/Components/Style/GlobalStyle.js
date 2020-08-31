@@ -34,7 +34,7 @@ ui {
 }
 
 h1, h2, h3 {
-  font-family: Pacifico;
+  font-family: Pacifico, cursive;
   padding: 0;
   margin: 0;
 }
@@ -49,6 +49,16 @@ button {
 }
 
 input, button {
-  font-family: inherit;
+  font: inherit;
 }
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
 `;
