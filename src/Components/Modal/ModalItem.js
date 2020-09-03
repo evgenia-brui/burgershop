@@ -5,8 +5,10 @@ import { CountItem } from './CountItem';
 import { useCount } from '../Hooks/useCount';
 import { formatCurrency } from '../Functions/secondaryFunction';
 import { totalPriceItems } from '../Functions/secondaryFunction';
-import { Toppings } from './Toppings'
-import { useToppings } from '../Hooks/useTopping'
+import { Toppings } from './Toppings';
+import { useToppings } from '../Hooks/useTopping';
+import { useChoices } from '../Hooks/useChoices';
+import { Choices } from './Choices';
 
 
 
@@ -58,10 +60,12 @@ const TotalPriceItem = styled.div`
     justify-content: space-between;
 `;
 
+
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
     const counter = useCount();
     const toppings = useToppings(openItem);
+    const choices = useChoices(openItem);
 
     const closeModal = e => {
         if (e.target.id === 'overlay') {
@@ -72,20 +76,17 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
     const order = {
         ...openItem,
         count: counter.count,
-        topping: toppings.toppings
+        topping: toppings.toppings,
+        choice: choices.choice,
     };
 
-    
-
     const addToOrder = () => {
-        setOrders([...orders, order])
+        setOrders([...orders, order]);
         setOpenItem(null);
     };
 
-    
-   
     return (
-        <Overlay id="overlay" onClick={ closeModal }>
+        <Overlay id="overlay" onClick={closeModal}>
             <Modal>
                 <Banner img={openItem.img}/>
                 <Content>
@@ -95,11 +96,15 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
                     </HeaderContent>
                     <CountItem {...counter}/>
                     {openItem.toppings && <Toppings {...toppings}/>}
+                    {openItem.choices && <Choices {...choices} openItem={openItem}/>}
                     <TotalPriceItem>
                         <span>Цена:</span>
                         <span>{formatCurrency(totalPriceItems(order))}</span>
                     </TotalPriceItem>
-                    <ButtonCheckout onClick={addToOrder} >Добавить</ButtonCheckout>
+                    <ButtonCheckout 
+                    onClick={addToOrder}
+                    disabled={order.choices && !order.choice} 
+                    >Добавить</ButtonCheckout>
                 </Content> 
             </Modal>
         </Overlay>
